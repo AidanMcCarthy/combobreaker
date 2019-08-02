@@ -33,8 +33,8 @@ PCB has been completely redesigned from scratch with an improved and updated pow
 ### [Analog Feedback Servo](https://www.adafruit.com/products/1404)
 **$15**: This servo not only provides the torque we need to lift the shackle (90.26 oz*in), but has an additional wire providing analog feedback that we use to detect the state of the shackle and whether it has opened or not.
 
-### [OKI-78SR Voltage Regulator](http://amzn.to/1A28XOt)
-**$6**: This is far more efficient and reliable than the original L7805
+### [OKI-78SR Voltage Regulator](https://www.digikey.com/product-detail/en/murata-power-solutions-inc/OKI-78SR-3.3-1.5-W36H-C/811-3014-ND/4878851)
+**$4.30**: This is far more efficient and reliable than the original L7805
 
 -----
 
