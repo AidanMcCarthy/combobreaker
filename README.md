@@ -1,6 +1,6 @@
 # [C-C-C-C-Combo Breaker](http://samy.pl/combobreaker/)
 
-This is an updated version of the original C-C-C-C-ComboBreaker project by SamyK
+This is an updated version of the original [C-C-C-C-ComboBreaker project by SamyK](https://github.com/samyk/combobreaker)
 
 PCB has been completely redesigned from scratch with an imporoved and updated power circuit, I2C display support, and silk screen labels for all connections.
 
