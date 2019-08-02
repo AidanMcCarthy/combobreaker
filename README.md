@@ -2,7 +2,7 @@
 
 This is an updated version of the original [C-C-C-C-ComboBreaker project by SamyK](https://github.com/samyk/combobreaker)
 
-PCB has been completely redesigned from scratch with an imporoved and updated power circuit, I2C display support, and silk screen labels for all connections.
+PCB has been completely redesigned from scratch with an improved and updated power circuit, I2C display support, and silk screen labels for all connections.
 
 ![image](https://user-images.githubusercontent.com/25337485/31258678-e4bf40ce-aa0e-11e7-9c1e-e49d0bd33a3a.png)
 
@@ -11,27 +11,6 @@ PCB has been completely redesigned from scratch with an imporoved and updated po
 
 
 **[Combo Breaker](http://samy.pl/combobreaker/)** is a motorized, battery powered, 3D printed, Arduino-based combination lock cracking device. It is portable, open source, 3D models provided, and exploits a new technique I've discovered for [cracking combination locks in 8 attempts or less](https://www.youtube.com/watch?v=09UgmwtL12c), but in an even more exciting, automated fashion.
-
-By [@SamyKamkar](https://twitter.com/samykamkar)
-
-#### Follow me on [Twitter](https://twitter.com/samykamkar) or [join my mailing list](http://samy.pl/list/) to hear about future projects and research.
-
-**Live demonstration** and full details available in [the video](https://www.youtube.com/watch?v=YcpSvHpbHQ4):
-<a href="https://www.youtube.com/watch?v=YcpSvHpbHQ4" target="_blank"><img src="http://img.youtube.com/vi/YcpSvHpbHQ4/0.jpg" alt="KeySweeper" width="640" height="480" border="10" /></a>
-
------
-
-**Point of Contact:** [@SamyKamkar](https://twitter.com/samykamkar) // <http://samy.pl>
-
-**Video demonstration / explanation:** [https://youtu.be/YcpSvHpbHQ4](https://youtu.be/YcpSvHpbHQ4)
-
-**Released:** May 14, 2015
-
-**Source code / 3D models:** [https://github.com/samyk/combobreaker](https://github.com/samyk/combobreaker)
-
-**Unit Cost:** < $100
-
-**Status:** Operational, open source, open hardware, declassified.
 
 -----
 
@@ -42,16 +21,10 @@ By [@SamyKamkar](https://twitter.com/samykamkar)
 ### [Arduino Nano](http://amzn.to/1QLlf23)
 **$12**: A [5V Arduino Nano](http://amzn.to/1QLlf23) microcontroller is used as the brains of the project.
 
-### [Allegro A3967 / EasyDriver Stepper Driver](http://amzn.to/1A1Ovxl)
-**$20**: I originally used an A3967-based [EasyDriver](http://amzn.to/1A1Ovxl) which can drive a stepper motor up to 30V at 750mA. This is what precisely controls the dial.
-
-### or [Allegro A4988](http://amzn.to/1L3q7fK)
+### [Allegro A4988](http://amzn.to/1L3q7fK)
 **$7**: Instead of the EasyDriver, I upgraded to a smaller, yet more powerful stepper driver that can go up to 1 amp (1000mA).
 
-### [Stepper Motor](http://amzn.to/1FfLUQG)
-**$30**: You can use a normal stepper motor for the "simpler" version of the Combo Breaker build, however if you're working on creating the more advanced version, you'll need a double-shaft stepper motor like I liste below.
-
-### or [Double Shaft Stepper Motor](http://www.phidgets.com/products.php?product_id=3320)
+### [Double Shaft Stepper Motor](http://www.phidgets.com/products.php?product_id=3320)
 **$16**: This double shaft stepper motor allows you to build the more advanced Combo Breaker while employing an optical rotary encoder on the back to detect the position of the stepper when the dial stops turning (which is part of the exploit employed).
 
 ### [HKT22 Optical Rotary Encoder](http://www.phidgets.com/products.php?product_id=3531)
@@ -60,27 +33,8 @@ By [@SamyKamkar](https://twitter.com/samykamkar)
 ### [Analog Feedback Servo](https://www.adafruit.com/products/1404)
 **$15**: This servo not only provides the torque we need to lift the shackle (90.26 oz*in), but has an additional wire providing analog feedback that we use to detect the state of the shackle and whether it has opened or not.
 
-### [L7805 Voltage Regulators](http://amzn.to/1A28XOt)
-**$6**: If you're using the analog feedback servo, you'll want to use an external voltage regulator to provide enough juice to the servo. While the Arduino is 5V and can drive the servo normally, it won't be able to pump out enough current for the servo when it starts hitting the shackle and could damage your Arduino.
-
-### [500mAh 3S Lipo Battery](http://amzn.to/1PkRVlz)
-**$20**: This 500mAh 3S (3-cell, 11.1V) battery gives enough juice to the stepper motor to be very effective, and at 500mAh can last between 30-120minutes straight before having to be recharged.
-
-### [Lipo Charger](http://amzn.to/1A1Q2n7)
-**$50**: This lipo charger is overkill if only used for this project, but is a good one that I use at home for a wide range of batteries and cells. You don't need this one, but if you want to recharge the battery, you'll need a charger that supports 3-cell LiPos.
-
-### [Arctic Alumina Thermal Adehsive](http://amzn.to/1PkTakG)
-**$8**: Not required, but this is the thermal **adhesive** I use to **permanently** attach the heatsink to the stepper motor driver. Normal thermal paste has very little adhesion and kept falling off, so I switched from thermal paste to this thermal adhesive.
-
-### [Digital Calipers](http://amzn.to/1K8juex)
-**$16**: If you don't already have digital calipers for precise measurements to measure the lock, for example, these are inexpensive and accurate.
-
-### [Breadboard and Wires](http://amzn.to/1FfMb6e)
-**$6**: If you don't already have a breadboard and wires, they will kind of help.
-
-[![Combo Breaker](http://samy.pl/combobreaker/sIMG_2875.JPG)](http://samy.pl/combobreaker/sIMG_2875.JPG)
-
-[![Combo Breaker](http://samy.pl/combobreaker/sIMG_2920.JPG)](http://samy.pl/combobreaker/sIMG_2920.JPG)
+### [OKI-78SR Voltage Regulator](http://amzn.to/1A28XOt)
+**$6**: This is far more efficient and reliable than the original L7805
 
 -----
 
@@ -102,15 +56,3 @@ I've included the 3D models on my github: <https://github.com/samyk/combobreaker
 [![Combo Breaker](http://samy.pl/combobreaker/sIMG_2919.JPG)](http://samy.pl/combobreaker/sIMG_2919.JPG)
 
 -----
-
-# (U) Contact
-
-**Point of Contact:** [@SamyKamkar](https://twitter.com/samykamkar)
-
-You can see more of my projects at <http://samy.pl>.
-
-#### Follow me on [Twitter](https://twitter.com/samykamkar) or [join my mailing list](http://samy.pl/list/) to hear about future projects and research.
-
-Thanks!
-
-------
