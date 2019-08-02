@@ -18,10 +18,10 @@ PCB has been completely redesigned from scratch with an improved and updated pow
 
 [![Combo Breaker](http://samy.pl/combobreaker/sIMG_2916.JPG)](http://samy.pl/combobreaker/sIMG_2916.JPG)
 
-### [Arduino Nano](https://www.amazon.com/ELEGOO-Arduino-ATmega328P-Without-Compatible/dp/B0713XK923/)
-**$13**: A [5V Arduino Nano](https://www.amazon.com/ELEGOO-Arduino-ATmega328P-Without-Compatible/dp/B0713XK923/) microcontroller is used as the brains of the project. Price is for a 3-pack
+### [Arduino Nano](https://amzn.to/2Ynut1U)
+**$13**: A [5V Arduino Nano](https://amzn.to/2Ynut1U) microcontroller is used as the brains of the project. Price is for a 3-pack
 
-### [Allegro A4988 StepStick Stepper Motor Driver Module](https://www.amazon.com/BIQU-Compatible-Stepper-StepStick-Controller/dp/B01FFGAKK8)
+### [Allegro A4988 StepStick Stepper Motor Driver Module](https://amzn.to/2YAWIW7)
 **$9**: Instead of the EasyDriver, I upgraded to a smaller, yet more powerful stepper driver that can go up to 1 amp (1000mA). Price is for a 5-pack
 
 ### [28STH32 NEMA-11 Bipolar Gearless Stepper Motor](http://www.phidgets.com/products.php?product_id=3320)
