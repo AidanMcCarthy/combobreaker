@@ -1,23 +1,23 @@
 /*
 
- C-C-C-C-Combo Breaker
- by samy kamkar
- http://samy.pl/combobreaker
- 
- A motorized, battery powered, 3D printed, 
- Arduino-based combination lock cracking device.
- 
- current hardware: 
- Stepper Motor (dial): 28STH32-0674B (3.8V 0.67A stepper)
- Rotary Encoder: HKT22-3531 optical rotary encoder (1200steps)
- Servo Motor (shackle): Batan S1213 (with analog feedback)
- Stepper Driver: Allegro A3967 or Allegro A4988 (EasyDriver, 750mA, 1/8th step)
- Microcontroller: Arduino Nano ATmega328P @ 5V
- 
- Stepper/Arduino Power: 3S LiPo battery (12V power supply also works)
- Servo Power: L7805 Voltage Regulator
- 
- */
+  C-C-C-C-Combo Breaker
+  by samy kamkar
+  http://samy.pl/combobreaker
+
+  A motorized, battery powered, 3D printed,
+  Arduino-based combination lock cracking device.
+
+  current hardware:
+  Stepper Motor (dial): 28STH32-0674B (3.8V 0.67A stepper)
+  Rotary Encoder: HKT22-3531 optical rotary encoder (1200steps)
+  Servo Motor (shackle): Batan S1213 (with analog feedback)
+  Stepper Driver: Allegro A3967 or Allegro A4988 (EasyDriver, 750mA, 1/8th step)
+  Microcontroller: Arduino Nano ATmega328P @ 5V
+
+  Stepper/Arduino Power: 3S LiPo battery (12V power supply also works)
+  Servo Power: L7805 Voltage Regulator
+
+*/
 
 // Servo requirements: at least 6.5kg/cm of torque
 
@@ -42,14 +42,14 @@
 // Encoder details (pins)
 #define ENCODER1 2 // 5
 #define ENCODER2 3 // 6
-#define ENCODER_STEPS 1200 // 1200 per rotation
+#define ENCODER_STEPS 200
 
 // Stepper driver details (controls the dial)
 #define DIR_PIN 4
 #define STEP_PIN 5
 
 #define STEPS 200
-#define MICROSTEPS 8 // was 8 on easydriver
+// #define MICROSTEPS 8 // was 8 on easydriver
 
 // fastest (us) we can get stepper moving without skipping
 // #define MIN_DELAY (1600 / MICROSTEPS) // was 200
@@ -75,14 +75,14 @@ Encoder myEnc(ENCODER1, ENCODER2);
 long oldPosition;
 int mini, maxi, minFeedback, maxFeedback;
 
-void setup() 
+void setup()
 {
   Serial.begin(BAUDRATE);
 
   pinMode(DIR_PIN, OUTPUT);
   pinMode(STEP_PIN, OUTPUT);
   pinMode(SERVO_FEEDBACK_PIN, INPUT);
-  shackle.attach(SERVO_PIN); 
+  shackle.attach(SERVO_PIN);
   oldPosition = myEnc.read();
 
   calibrateServo();
@@ -92,20 +92,20 @@ void loop()
 {
   brute(-1, -1, -1);
 
-  for (int i = 0; i < ceil(DIGITS/3); i++)
+  for (int i = 0; i < ceil(DIGITS / 3); i++)
   {
     // turn to new position
     spinto(0, i * 3, CCW);
 
     // hold shackle high to find left and right
     shackleHigh();
-    spinto(0, (i-1)*3, CW);
+    spinto(0, (i - 1) * 3, CW);
     //    delay(100);
 
     Serial.print("spin low ");
     Serial.print(oldPosition);
     Serial.print(" ");
-    spinto(0, (i+1)*3, CCW);
+    spinto(0, (i + 1) * 3, CCW);
     //    delay(100);
     Serial.print(oldPosition);
     Serial.println("");
@@ -130,7 +130,7 @@ void loop()
 // putting stress on the motor and 3d printed case
 void shackleHigh()
 {
-  shackle.write(maxi + (FB_DIFF*(FB_TOLERANCE-1)));
+  shackle.write(maxi + (FB_DIFF * (FB_TOLERANCE - 1)));
 }
 
 // puts the shackle in middle position
@@ -145,11 +145,11 @@ boolean openShackle()
   int fb;
   boolean ret = false;
 
-  shackle.write(maxi + (FB_DIFF*FB_TOLERANCE*1.5));
+  shackle.write(maxi + (FB_DIFF * FB_TOLERANCE * 1.5));
   delay(300);
 
   fb = analogRead(SERVO_FEEDBACK_PIN);
-  if (fb - maxFeedback > FB_DIFF*FB_TOLERANCE)
+  if (fb - maxFeedback > FB_DIFF * FB_TOLERANCE)
   {
     Serial.println("OPENED!");
     ret = true;
@@ -189,7 +189,7 @@ void calibrateServo()
     // if difference is less than 10, we can't move!
     if (fb - minFeedback < FB_DIFF)
     {
-      mini = i + (FB_DIFF*FB_TOLERANCE);
+      mini = i + (FB_DIFF * FB_TOLERANCE);
       Serial.println("crap!");
       break;
     }
@@ -198,7 +198,7 @@ void calibrateServo()
   }
 
 
-  for (i+=FB_DIFF*2; i <= SERVO_MAX; i += FB_DIFF)
+  for (i += FB_DIFF * 2; i <= SERVO_MAX; i += FB_DIFF)
   {
     Serial.print("i=");
     Serial.print(i);
@@ -212,7 +212,7 @@ void calibrateServo()
     // if difference is less than 10, we can't move!
     if (maxFeedback - fb < FB_DIFF)
     {
-      maxi = i - (FB_DIFF*FB_TOLERANCE);
+      maxi = i - (FB_DIFF * FB_TOLERANCE);
       Serial.print("crap!! changing to ");
       Serial.println(maxi);
       shackleMid();
@@ -237,21 +237,21 @@ void brute(int pin1, int pin2, int pin3)
 
   if (pin1 == -1)
     si = pin2 >= 0 ?
-    (pin2 + 2) % 4 :
-    pin3 >= 0 ?
-    pin3 % 4 : 0;
+         (pin2 + 2) % 4 :
+         pin3 >= 0 ?
+         pin3 % 4 : 0;
 
   if (pin2 == -1)
     sj = pin1 >= 0 ?
-    (pin1 + 2) % 4 :
-    pin3 >= 0 ?
-    (pin3 + 2) % 4 : 0;
+         (pin1 + 2) % 4 :
+         pin3 >= 0 ?
+         (pin3 + 2) % 4 : 0;
 
   if (pin3 == -1)
     sk = pin1 >= 0 ?
-    pin1 % 4 :
-    pin2 >= 0 ?
-    (pin2 + 2) % 4 : 0;
+         pin1 % 4 :
+         pin2 >= 0 ?
+         (pin2 + 2) % 4 : 0;
 
   Serial.println(si);
   Serial.println(sj);
@@ -282,7 +282,7 @@ void brute(int pin1, int pin2, int pin3)
 // enter a full combination through the dial
 void pin(int pin1, int pin2, int pin3)
 {
-  // clockwise 3 times, then to first number  
+  // clockwise 3 times, then to first number
   spinto(3, pin1, CW);
 
   // counterclockwise once, then to second
@@ -302,7 +302,7 @@ void spinto(int spins, int digit, boolean cw)
   for (int i = 0; i < spins; i++)
   {
     step(STEPS);
-//    delay(1000);
+    //    delay(1000);
   }
 
   // track where we are for next time (get set later)
@@ -325,31 +325,31 @@ void spinto(int spins, int digit, boolean cw)
   Serial.print(" moving ");
   Serial.println(digit);
   step(digit * (STEPS / DIGITS));
-//  delay(1000);
+  //  delay(1000);
 }
 
 /*
-void rotate(int digits, boolean cw)
- {
- rotate(0, digits, cw);
- }
- 
- void rotate(int spins, int digits, boolean cw)
- {
- digitalWrite(DIR_PIN, cw ? HIGH : LOW);
- 
- // spin some amount all the way?
- for (int i = 0; i < spins; i++)
- {
- step(STEPS);
-// delay(1000);
- }
- 
- 
- step(digits * (STEPS / DIGITS));
-// delay(1000);
- }
- */
+  void rotate(int digits, boolean cw)
+  {
+  rotate(0, digits, cw);
+  }
+
+  void rotate(int spins, int digits, boolean cw)
+  {
+  digitalWrite(DIR_PIN, cw ? HIGH : LOW);
+
+  // spin some amount all the way?
+  for (int i = 0; i < spins; i++)
+  {
+  step(STEPS);
+  // delay(1000);
+  }
+
+
+  step(digits * (STEPS / DIGITS));
+  // delay(1000);
+  }
+*/
 
 // step to location
 // TODO: return encoder feedback
@@ -378,4 +378,3 @@ void step(int steps)
     Serial.println(oldPosition);
   }
 }
-
