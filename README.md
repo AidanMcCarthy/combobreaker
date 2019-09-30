@@ -1,4 +1,4 @@
-# [C-C-C-C-Combo Breaker](http://samy.pl/combobreaker/)
+# [Master Combination Lock Combo Breaker]
 
 This is an updated version of the original [C-C-C-C-ComboBreaker project by SamyK](https://github.com/samyk/combobreaker)
 
