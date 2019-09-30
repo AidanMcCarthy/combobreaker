@@ -11,4 +11,4 @@ PCB has been completely redesigned from scratch with an improved and updated pow
 
 I've started on a new chassis for the stepper and servo...
 
-![image](https://github.com/AidanMcCarthy/combobreaker/blob/master/3D%20Models/ComboBreaker%20v2.png)
+![image](https://github.com/AidanMcCarthy/combobreaker/blob/master/3D%20Models/ComboBreaker%20v2%20Powder%20Coat%20Red.png)
