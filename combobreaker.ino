@@ -49,7 +49,7 @@
 #define STEP_PIN 5
 
 #define STEPS 200
-// #define MICROSTEPS 8 // was 8 on easydriver
+#define MICROSTEPS 8 // was 8 on easydriver
 
 // fastest (us) we can get stepper moving without skipping
 // #define MIN_DELAY (1600 / MICROSTEPS) // was 200
