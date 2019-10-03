@@ -1,5 +1,4 @@
 /*
-
   C-C-C-C-Combo Breaker
   by samy kamkar
   http://samy.pl/combobreaker
@@ -7,7 +6,6 @@
   A motorized, battery powered, 3D printed,
   Arduino-based combination lock cracking device.
 
-  current hardware:
   Stepper Motor (dial): 28STH32-0674B (3.8V 0.67A stepper)
   Rotary Encoder: HKT22-3531 optical rotary encoder (1200steps)
   Servo Motor (shackle): Batan S1213 (with analog feedback)
@@ -15,21 +13,21 @@
   Microcontroller: Arduino Nano ATmega328P @ 5V
 
   Stepper/Arduino Power: 3S LiPo battery (12V power supply also works)
-  Servo Power: L7805 Voltage Regulator
-
 */
 
 // Servo requirements: at least 6.5kg/cm of torque
-
 // TODO: CW could be autodetected by the rotary encoder
 // Depending on your stepper wiring, you may need to change CW to true or false
-#define CW true // clockwise
-#define CCW !CW // counter-clockwise
 
-// Servo details (lifts the shackle)
+// Modules
 #include <Servo.h>
 #include <Encoder.h>
 
+// Variables
+#define CW true             // clockwise
+#define CCW !CW             // counter-clockwise
+
+// Servo (Batan S1213)
 #define SERVO_DEFAULT 30
 #define SERVO_MIN 0
 #define SERVO_MAX 200
@@ -39,22 +37,22 @@
 #define FB_TOLERANCE 3.5
 #define FB_DELAY 500
 
-// Encoder details (pins)
+// Encoder (HKT22)
 #define ENCODER1 2          // 5
 #define ENCODER2 3          // 6
-#define ENCODER_STEPS 200   // 300 CPM 1200 PPR
+#define ENCODER_STEPS 1200  // 300 CPM    1200 PPR
 
-// Stepper driver details (controls the dial)
+// Stepper Driver (A4988)
 #define DIR_PIN 4
 #define STEP_PIN 5
-#define STEPS 200
-#define MICROSTEPS 8        // was 8 on easydriver
+#define STEPS 200           // 200 = FULL step mode    400 = HALF step mode     800 = QUARTER step mode
+#define MICROSTEPS 1        // 1 = FULL step mode
 
 // fastest (us) we can get stepper moving without skipping
 // #define MIN_DELAY (1600 / MICROSTEPS) // was 200
 #define MIN_DELAY 400
 
-// Number of digits on a Master combo lock
+// MasterLock
 #define DIGITS 40
 
 // C's % is remainder instead of modulo
