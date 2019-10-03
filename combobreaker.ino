@@ -40,16 +40,15 @@
 #define FB_DELAY 500
 
 // Encoder details (pins)
-#define ENCODER1 2 // 5
-#define ENCODER2 3 // 6
-#define ENCODER_STEPS 200
+#define ENCODER1 2          // 5
+#define ENCODER2 3          // 6
+#define ENCODER_STEPS 200   // 300 CPM 1200 PPR
 
 // Stepper driver details (controls the dial)
 #define DIR_PIN 4
 #define STEP_PIN 5
-
 #define STEPS 200
-#define MICROSTEPS 8 // was 8 on easydriver
+#define MICROSTEPS 8        // was 8 on easydriver
 
 // fastest (us) we can get stepper moving without skipping
 // #define MIN_DELAY (1600 / MICROSTEPS) // was 200
