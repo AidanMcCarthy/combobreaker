@@ -1,6 +1,3 @@
-#include <U8g2lib.h>
-#include <U8x8lib.h>
-
 /*
   C-C-C-C-Combo Breaker
   by samy kamkar
@@ -294,20 +291,18 @@ void brute(int pin1, int pin2, int pin3)
 
         // Display test text on LCD module
         u8g2.clearBuffer();
-        u8g2.setCursor(17,49);
-        u8g2.setFont(u8g2_font_4x6_mf);
+        u8g2.setCursor(0,20);
+        u8g2.setFont(u8g2_font_crox2h_tf);
         u8g2.print("Testing Combination:");
 
-        u8g2.setCursor(17,60);
-        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.setFont(u8g2_font_maniac_tn);
+        u8g2.setCursor(0, 55);
         u8g2.print(i);
         
-        u8g2.setCursor(35, 60);
-        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.setCursor(45, 55);
         u8g2.print(j);
 
-        u8g2.setCursor(55, 60);
-        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.setCursor(90, 55);
         u8g2.print(k);
 
         u8g2.sendBuffer();    // write output to display 
