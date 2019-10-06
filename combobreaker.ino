@@ -11,8 +11,6 @@
   Servo Motor (shackle): Batan S1213 (with analog feedback)
   Stepper Driver: Allegro A3967 or Allegro A4988 (EasyDriver, 750mA, 1/8th step)
   Microcontroller: Arduino Nano ATmega328P @ 5V
-
-  Stepper/Arduino Power: 3S LiPo battery (12V power supply also works)
 */
 
 // Servo requirements: at least 6.5kg/cm of torque
@@ -34,8 +32,10 @@
   #include <Wire.h>
 #endif
 
-U8G2_SH1106_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
+// https://github.com/olikraus/u8g2
+// https://github.com/olikraus/u8g2/wiki/u8g2reference
 
+U8G2_SH1106_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 
 // Variables
 #define CW false             // clockwise
@@ -135,11 +135,6 @@ void loop()
     shackleMid();
     delay(2000);
   }
-
-  //  spinto(1, 0, CW);
-  //  brute(16, -1, 16);
-  //  pin(0, 0, 0);
-  //  openShackle();
 }
 
 // pulls the shackle up
@@ -362,29 +357,6 @@ void spinto(int spins, int digit, boolean cw)   // Spin to specific digit
   step(digit * (STEPS / DIGITS));
   //  delay(1000);
 }
-
-/*
-  void rotate(int digits, boolean cw)
-  {
-  rotate(0, digits, cw);
-  }
-
-  void rotate(int spins, int digits, boolean cw)
-  {
-  digitalWrite(DIR_PIN, cw ? HIGH : LOW);
-
-  // spin some amount all the way?
-  for (int i = 0; i < spins; i++)
-  {
-  step(STEPS);
-  // delay(1000);
-  }
-
-
-  step(digits * (STEPS / DIGITS));
-  // delay(1000);
-  }
-*/
 
 // step to location
 // TODO: return encoder feedback
