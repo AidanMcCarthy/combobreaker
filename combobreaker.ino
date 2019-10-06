@@ -1,3 +1,6 @@
+#include <U8g2lib.h>
+#include <U8x8lib.h>
+
 /*
   C-C-C-C-Combo Breaker
   by samy kamkar
@@ -20,12 +23,25 @@
 // Depending on your stepper wiring, you may need to change CW to true or false
 
 // Modules
+#include <U8g2lib.h>        // LCD Library
 #include <Servo.h>          // This library allows an Arduino board to control RC (hobby) servo motors.
 #include <Encoder.h>        // Encoder counts pulses from quadrature encoded signals, which are commonly available from rotary knobs, motor or shaft sensors and other position sensors.
                             // https://www.pjrc.com/teensy/td_libs_Encoder.html
-                            
+
+// Include display libraries if needed
+#ifdef U8X8_HAVE_HW_SPI
+  #include <SPI.h>
+#endif
+
+#ifdef U8X8_HAVE_HW_I2C
+  #include <Wire.h>
+#endif
+
+U8G2_SH1106_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
+
+
 // Variables
-#define CW true             // clockwise
+#define CW false             // clockwise
 #define CCW !CW             // counter-clockwise
 
 // Servo (Batan S1213)
@@ -41,7 +57,7 @@
 // Encoder (HKT22)
 #define ENCODER1 2          // 5
 #define ENCODER2 3          // 6
-#define ENCODER_STEPS 1200  // 300 CPM    1200 PPR
+#define ENCODER_STEPS 300  // 300 CPM    1200 PPR
 
 // Stepper Driver (A4988)
 #define DIR_PIN 4
@@ -51,7 +67,7 @@
 
 // fastest (us) we can get stepper moving without skipping
 // #define MIN_DELAY (1600 / MICROSTEPS) // was 200
-#define MIN_DELAY 400
+#define MIN_DELAY 500
 
 // MasterLock
 #define DIGITS 40
@@ -60,7 +76,7 @@
 #define mod(a, b) ((a % b + b) % b)
 
 // For debug
-#define BAUDRATE 9600
+#define BAUDRATE 115200
 
 // this means we can rotate *consistently* 3.125 times per second (187.5rpm):
 // 1sec in us / min_delay / (steps * microsteps)
@@ -77,6 +93,9 @@ void setup()
 {
   Serial.begin(BAUDRATE);
 
+  u8g2.begin();
+  u8g2.enableUTF8Print();   // enable UTF8 support for the Arduino print() function
+
   pinMode(DIR_PIN, OUTPUT);
   pinMode(STEP_PIN, OUTPUT);
   pinMode(SERVO_FEEDBACK_PIN, INPUT);
@@ -88,6 +107,11 @@ void setup()
 
 void loop()
 {
+  u8g2.setFontMode(1);
+  u8g2.setDrawColor(1);
+  u8g2.setFont(u8g2_font_profont12_tf);
+  u8g2.clearBuffer();
+
   brute(-1, -1, -1);
 
   for (int i = 0; i < ceil(DIGITS / 3); i++)
@@ -267,6 +291,26 @@ void brute(int pin1, int pin2, int pin3)
         Serial.print(" ");
         Serial.print(k);
         Serial.println();
+
+        // Display test text on LCD module
+        u8g2.clearBuffer();
+        u8g2.setCursor(17,49);
+        u8g2.setFont(u8g2_font_4x6_mf);
+        u8g2.print("Testing Combination:");
+
+        u8g2.setCursor(17,60);
+        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.print(i);
+        
+        u8g2.setCursor(35, 60);
+        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.print(j);
+
+        u8g2.setCursor(55, 60);
+        u8g2.setFont(u8g2_font_pxplusibmvga8_m_all);
+        u8g2.print(k);
+
+        u8g2.sendBuffer();    // write output to display 
 
         pin(i, j, k);
         if (openShackle())
