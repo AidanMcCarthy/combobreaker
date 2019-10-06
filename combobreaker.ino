@@ -20,9 +20,10 @@
 // Depending on your stepper wiring, you may need to change CW to true or false
 
 // Modules
-#include <Servo.h>
-#include <Encoder.h>
-
+#include <Servo.h>          // This library allows an Arduino board to control RC (hobby) servo motors.
+#include <Encoder.h>        // Encoder counts pulses from quadrature encoded signals, which are commonly available from rotary knobs, motor or shaft sensors and other position sensors.
+                            // https://www.pjrc.com/teensy/td_libs_Encoder.html
+                            
 // Variables
 #define CW true             // clockwise
 #define CCW !CW             // counter-clockwise
@@ -67,7 +68,7 @@
 int current_digit = 0;
 
 Servo shackle;
-Encoder myEnc(ENCODER1, ENCODER2);
+Encoder myEnc(ENCODER1, ENCODER2);    // Create an Encoder object, using 2 pins. 
 //int servo_pos = 0;
 long oldPosition;
 int mini, maxi, minFeedback, maxFeedback;
@@ -289,9 +290,7 @@ void pin(int pin1, int pin2, int pin3)
   spinto(0, pin3, CW);
 }
 
-// spin to a specific digit,
-// possibly with some additional rotations
-void spinto(int spins, int digit, boolean cw)
+void spinto(int spins, int digit, boolean cw)   // Spin to specific digit
 {
   digitalWrite(DIR_PIN, cw ? HIGH : LOW);
 
@@ -361,8 +360,7 @@ void step(int steps)
     delayMicroseconds(MIN_DELAY);
   }
 
-  // get encoder position
-  newPosition = myEnc.read();
+  newPosition = myEnc.read();             // Returns the accumulated position. This number can be positive or negative.
   if (newPosition != oldPosition)
   {
     //      oldPosition = newPosition;
