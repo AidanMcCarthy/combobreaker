@@ -14,8 +14,11 @@
 */
 
 // Servo requirements: at least 6.5kg/cm of torque
+
 // TODO: CW could be autodetected by the rotary encoder
 // Depending on your stepper wiring, you may need to change CW to true or false
+// Use AccelStepper as it supports accelleration and decelleration. May help prevent skipping?
+
 
 // Modules
 #include <U8g2lib.h>        // LCD Library
